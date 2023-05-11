@@ -1,3 +1,3 @@
-module "aws" {
+resource "aws_instance" "name" {
   
 }
