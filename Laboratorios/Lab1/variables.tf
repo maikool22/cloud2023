@@ -1,16 +1,16 @@
 variable "ami" {
-    type = "string"
-    descdescription = "Variable para el id de la ami"  
+  type        = string
+  description = "Variable para el id de la ami"
 }
 
 variable "instance_type" {
-    type = "string"  
+  type = string
 }
 
 variable "key_name" {
-    type = "string"  
+  type = string
 }
 
-variable "Name" {
-    type = "string"  
+variable "name" {
+  type = string
 }
