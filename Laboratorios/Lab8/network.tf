@@ -22,9 +22,9 @@ resource "aws_subnet" "subnet1-practico-3tier" {
 }
 
 resource "aws_subnet" "subnet2-practico-3tier" {
-  vpc_id                          = aws_vpc.vpc-practico-3tier.id
-  cidr_block                      = "10.0.2.0/24"
-  availability_zone               = "us-east-1b"
+  vpc_id                  = aws_vpc.vpc-practico-3tier.id
+  cidr_block              = "10.0.2.0/24"
+  availability_zone       = "us-east-1b"
   map_public_ip_on_launch = true
 
   tags = {
@@ -51,15 +51,15 @@ resource "aws_route_table" "route-table-practico-3tier" {
 }
 
 resource "aws_lb" "ALB" {
-    name = "ALB"
-    internal = false
-    load_balancer_type = "application"
-    security_groups = [aws_security_group.ssh-http-access.id]
-    subnets = [aws_subnet.subnet1-practico-3tier.id, aws_instance.webapp-server02.id]
+  name               = "ALB"
+  internal           = false
+  load_balancer_type = "application"
+  security_groups    = [aws_security_group.ssh-http-access.id]
+  subnets            = [aws_subnet.subnet1-practico-3tier.id, aws_instance.webapp-server02.id]
 
-    tags = {
-        Name = "ALB"
-    }
+  tags = {
+    Name = "ALB"
+  }
 
-  
+
 }
