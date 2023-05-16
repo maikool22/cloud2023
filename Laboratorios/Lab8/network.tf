@@ -55,7 +55,7 @@ resource "aws_lb" "ALB" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.ssh-http-access.id]
-  subnets            = [aws_subnet.subnet1-practico-3tier.id, aws_instance.webapp-server02.id]
+  subnets            = [aws_subnet.subnet1-practico-3tier.id, aws_subnet.subnet2-practico-3tier.id]
 
   tags = {
     Name = "ALB"
