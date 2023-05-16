@@ -50,6 +50,19 @@ resource "aws_route_table" "route-table-practico-3tier" {
 
 }
 
+# asociacion de las subredes con la tabla de rutas
+
+resource "aws_route_table_association" "aws_rt_asociation1" {
+  subnet_id      = aws_subnet.subnet1-practico-3tier.id
+  route_table_id = aws_route_table.route-table-practico-3tier.id
+}
+
+
+resource "aws_route_table_association" "aws_rt_asociation2" {
+  subnet_id      = aws_subnet.subnet2-practico-3tier.id
+  route_table_id = aws_route_table.route-table-practico-3tier.id
+}
+
 resource "aws_lb" "ALB" {
   name               = "ALB"
   internal           = false
@@ -60,6 +73,27 @@ resource "aws_lb" "ALB" {
   tags = {
     Name = "ALB"
   }
-
-
 }
+#creacion del grupo de destino para el ALB
+resource "aws_lb_target_group" "targetgroup-practico3-3tier" {
+  name        = "targetgroup"
+  port        = 80
+  protocol    = "HTTP"
+  vpc_id      = aws_vpc.vpc-practico-3tier.id
+  target_type = "instance"
+}
+
+#creacion del listener para el ALB
+resource "aws_lb_listener" "listener-practico3tier" {
+  load_balancer_arn = aws_lb.ALB.arn
+  port              = 80
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.targetgroup-practico3-3tier.arn
+  }
+}
+
+
+
