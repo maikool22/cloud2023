@@ -16,6 +16,6 @@ resource "aws_instance" "webapp-server02" {
   vpc_security_group_ids = [aws_security_group.ssh-http-access.id]
   subnet_id              = aws_subnet.subnet2-practico-3tier.id
   tags = {
-    Name = "webapp-server01"
+    Name = "webapp-server02"
   }
 }
