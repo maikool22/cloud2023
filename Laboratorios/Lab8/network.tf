@@ -33,6 +33,7 @@ resource "aws_subnet" "subnet2-practico-3tier" {
 
 }
 
+# creamos el Internet Gateway
 resource "aws_internet_gateway" "inetgw-practico-3tier" {
   vpc_id = aws_vpc.vpc-practico-3tier.id
   tags = {
@@ -40,6 +41,7 @@ resource "aws_internet_gateway" "inetgw-practico-3tier" {
   }
 }
 
+# creamos la route table asociada al internet gateway
 resource "aws_route_table" "route-table-practico-3tier" {
   vpc_id = aws_vpc.vpc-practico-3tier.id
 
@@ -63,6 +65,7 @@ resource "aws_route_table_association" "aws_rt_asociation2" {
   route_table_id = aws_route_table.route-table-practico-3tier.id
 }
 
+#aca creo el ALB y les paso las subnets y los sg
 resource "aws_lb" "ALB" {
   name               = "ALB"
   internal           = false
@@ -74,7 +77,8 @@ resource "aws_lb" "ALB" {
     Name = "ALB"
   }
 }
-#creacion del grupo de destino para el ALB
+
+#creacion de los target groups para el ALB
 resource "aws_lb_target_group" "targetgroup-practico3-3tier" {
   name        = "targetgroup"
   port        = 80
