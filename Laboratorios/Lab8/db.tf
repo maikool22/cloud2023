@@ -1,4 +1,4 @@
-/* # creamos la base de datos
+# creamos la base de datos
 resource "aws_db_instance" "db-practico-3tier" {
   allocated_storage    = 10
   db_name              = "mydb"
@@ -14,4 +14,4 @@ resource "aws_db_instance" "db-practico-3tier" {
 resource "aws_db_subnet_group" "db-subnet-practico-3tier" {
   name       = "db-subnet-group"
   subnet_ids = [aws_subnet.subnet1-practico-3tier.id, aws_subnet.subnet2-practico-3tier.id]
-} */
+}
